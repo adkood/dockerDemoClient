@@ -14,9 +14,11 @@ import {
   useToast
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const AddPost = () => {
 
+  const userToken = useSelector((state) => state.auth.userToken)
   const toast = useToast();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -44,6 +46,10 @@ const AddPost = () => {
       }
 
       const response = await axios.post('https://dockerdemoserver.onrender.com/api/books', bookInfo, {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }, {
         withCredentials: true,
       });
 
