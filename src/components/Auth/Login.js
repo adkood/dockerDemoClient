@@ -30,6 +30,7 @@ function Login() {
       });
 
       if (response.status === 200) {
+        console.log(response);
         alert('Login successful!');
         dispatch(authActions.login());
         dispatch(authActions.setId(response.data.data.user._id));
